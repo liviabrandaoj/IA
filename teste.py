@@ -3,14 +3,14 @@ import os
 import imutils
 
 personName = 'victor'
-dataPath = 'C:/Users/livia/Downloads' #Cambia a la ruta donde hayas almacenado Data
+dataPath = './midia/' #Cambia a la ruta donde hayas almacenado Data
 personPath = dataPath + '/' + personName
 
 if not os.path.exists(personPath):
 	print('Pasta criada: ',personPath)
 	os.makedirs(personPath)
 
-video_path = r"C:/Users/livia/Downloads/victor.mov"
+video_path = os.path.join(dataPath, "victor.mov")
 cap = cv2.VideoCapture(video_path)
 
 faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
@@ -28,9 +28,9 @@ while True:
 
 	for (x,y,w,h) in faces:
 		cv2.rectangle(frame, (x,y),(x+w,y+h),(0,255,0),2)
-		rostro = auxFrame[y:y+h,x:x+w]
-		rostro = cv2.resize(rostro,(150,150),interpolation=cv2.INTER_CUBIC)
-		cv2.imwrite(personPath + '/rosto_{}.jpg'.format(count),rostro)
+		rosto = auxFrame[y:y+h,x:x+w]
+		rosto = cv2.resize(rosto,(150,150),interpolation=cv2.INTER_CUBIC)
+		cv2.imwrite(personPath + '/rosto_{}.jpg'.format(count),rosto)
 		count = count + 1
 	cv2.imshow('frame',frame)
 
